@@ -15,115 +15,113 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener {
 
-	Stage mainStage;
-	GestureDetector gd;
-	Objekat lopta;
-	Objekat gameover;
-	float dt;
-	double randomX;
-	double randomY;
-	
-	@Override
-	public void create () {
-		mainStage = new Stage();
+    Stage mainStage;
+    GestureDetector gd;
+    Objekat lopta;
+    Objekat gameover;
+    float dt;
+    double randomX;
+    double randomY;
 
-		gameover = new Objekat();
-		gameover.setTexture(new Texture("gameover.png"));
-		gameover.setVisible(false);
-		gameover.setWidth(300);
-		gameover.setHeight(100);
-		gameover.setPosition(Gdx.graphics.getWidth()/2-gameover.getWidth()/2,Gdx.graphics.getHeight()/2-gameover.getHeight()/2);
+    @Override
+    public void create() {
+        mainStage = new Stage();
 
-		lopta = new Objekat();
-		lopta.setTexture(new Texture("ball2.png"));
-		lopta.setWidth(30);
-		lopta.setHeight(30);
-		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
-		lopta.brzinaX = 50;
-		lopta.brzinaY = 50;
-		gd = new GestureDetector(this);
-		Gdx.input.setInputProcessor(gd);
-		mainStage.addActor(lopta);
-		mainStage.addActor(gameover);
-	}
+        gameover = new Objekat();
+        gameover.setTexture(new Texture("gameover.png"));
+        gameover.setVisible(false);
+        gameover.setWidth(300);
+        gameover.setHeight(100);
+        gameover.setPosition(Gdx.graphics.getWidth() / 2 - gameover.getWidth() / 2, Gdx.graphics.getHeight() / 2 - gameover.getHeight() / 2);
 
-	@Override
-	public void render () {
+        lopta = new Objekat();
+        lopta.setTexture(new Texture("ball2.png"));
+        lopta.setWidth(30);
+        lopta.setHeight(30);
+        lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, Gdx.graphics.getHeight() / 2 - lopta.getHeight() / 2);
+        lopta.brzinaX = 50;
+        lopta.brzinaY = 50;
+        gd = new GestureDetector(this);
+        Gdx.input.setInputProcessor(gd);
+        mainStage.addActor(lopta);
+        mainStage.addActor(gameover);
+    }
 
-		if(lopta.getX()<0 || lopta.getY()<0|| lopta.getX()+lopta.getWidth()>Gdx.graphics.getWidth() || lopta.getY()+lopta.getHeight()>Gdx.graphics.getHeight()){
-			lopta.brzinaX = 0;
-			lopta.brzinaY = 0;
-			gameover.setVisible(true);
+    @Override
+    public void render() {
 
-		}
+        if (lopta.getX() < 0 || lopta.getY() < 0 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight()) {
+            lopta.brzinaX = 0;
+            lopta.brzinaY = 0;
+            gameover.setVisible(true);
 
-
-		if(Gdx.input.justTouched()){
-			lopta.started = true;
-			lopta.setSize(lopta.getWidth()+10,lopta.getHeight()+10);
-			lopta.brzinaX*=1.1;
-			lopta.brzinaY*=1.1;
-			lopta.brzinaX = -lopta.brzinaX;
-			lopta.brzinaY = -lopta.brzinaY;
-		}
-
-		dt = Gdx.graphics.getDeltaTime();
-		mainStage.act(dt);
+        }
 
 
+        if (Gdx.input.justTouched()) {
+            lopta.started = true;
+            lopta.setSize(lopta.getWidth() + 10, lopta.getHeight() + 10);
+            lopta.brzinaX *= 1.1;
+            lopta.brzinaY *= 1.1;
+            lopta.brzinaX = -lopta.brzinaX;
+            lopta.brzinaY = -lopta.brzinaY;
+        }
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-		mainStage.draw();
-	}
-	
+        dt = Gdx.graphics.getDeltaTime();
+        mainStage.act(dt);
 
 
-	@Override
-	public boolean touchDown(float x, float y, int pointer, int button) {
-		return false;
-	}
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-	@Override
-	public boolean tap(float x, float y, int count, int button) {
+        mainStage.draw();
+    }
 
-		return false;
-	}
 
-	@Override
-	public boolean longPress(float x, float y) {
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        return false;
+    }
 
-		return false;
-	}
+    @Override
+    public boolean tap(float x, float y, int count, int button) {
 
-	@Override
-	public boolean fling(float velocityX, float velocityY, int button) {
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean pan(float x, float y, float deltaX, float deltaY) {
-		return false;
-	}
+    @Override
+    public boolean longPress(float x, float y) {
 
-	@Override
-	public boolean panStop(float x, float y, int pointer, int button) {
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean zoom(float initialDistance, float distance) {
-		return false;
-	}
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
+        return false;
+    }
 
-	@Override
-	public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
-		return false;
-	}
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+        return false;
+    }
 
-	@Override
-	public void pinchStop() {
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
 
-	}
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        return false;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2 pointer1, Vector2 pointer2) {
+        return false;
+    }
+
+    @Override
+    public void pinchStop() {
+
+    }
 }
