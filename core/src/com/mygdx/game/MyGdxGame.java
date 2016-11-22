@@ -27,7 +27,7 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 		mainStage = new Stage();
 
 		lopta = new Objekat();
-		lopta.setTexture(new Texture("ball22.png"));
+		lopta.setTexture(new Texture("ball.png"));
 		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
 		lopta.setWidth(30);
 		lopta.setHeight(30);
