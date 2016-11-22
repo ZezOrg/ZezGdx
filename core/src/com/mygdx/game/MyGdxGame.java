@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,25 +14,24 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener {
-	SpriteBatch batch;
-	Stage mainStage;
 
-	OrthographicCamera camera;
+	Stage mainStage;
 	GestureDetector gd;
 	Objekat lopta;
 	float dt;
+	double randomX;
+	double randomY;
 	
 	@Override
 	public void create () {
 		mainStage = new Stage();
-		batch = new SpriteBatch();
+
 		lopta = new Objekat();
 		lopta.setTexture(new Texture("ball.png"));
 		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
 		lopta.setWidth(30);
 		lopta.setHeight(30);
-		camera = new OrthographicCamera(1024,720);
-		camera.update();
+
 		gd = new GestureDetector(this);
 		Gdx.input.setInputProcessor(gd);
 		mainStage.addActor(lopta);
@@ -39,8 +39,8 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public void render () {
-		lopta.brzinaX = 0;
-		lopta.brzinaY = 0;
+		lopta.brzinaX = 50;
+		lopta.brzinaY = 50;
 
 
 		dt = Gdx.graphics.getDeltaTime();
@@ -54,11 +54,7 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 		mainStage.draw();
 	}
 	
-	@Override
-	public void dispose () {
-		batch.dispose();
 
-	}
 
 	@Override
 	public boolean touchDown(float x, float y, int pointer, int button) {
@@ -67,16 +63,11 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
-		if(count>1){
 
-		}else {
-			Vector3 tuchPos = new Vector3(x, y, 0);
-			camera.unproject(tuchPos);
-			lopta.setPosition(tuchPos.x,tuchPos.y);
+		dt = 2;
 
 
-		}
-		return false;
+		return true;
 	}
 
 	@Override
