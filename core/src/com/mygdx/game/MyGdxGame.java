@@ -18,6 +18,7 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 	Stage mainStage;
 	GestureDetector gd;
 	Objekat lopta;
+	Objekat gameover;
 	float dt;
 	double randomX;
 	double randomY;
@@ -26,25 +27,42 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 	public void create () {
 		mainStage = new Stage();
 
+		gameover = new Objekat();
+		gameover.setTexture(new Texture("gameover.png"));
+		gameover.setVisible(false);
+		gameover.setWidth(300);
+		gameover.setHeight(100);
+		gameover.setPosition(Gdx.graphics.getWidth()/2-gameover.getWidth()/2,Gdx.graphics.getHeight()/2-gameover.getHeight()/2);
+
 		lopta = new Objekat();
-		lopta.setTexture(new Texture("ball.png"));
-		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
+		lopta.setTexture(new Texture("ball2.png"));
 		lopta.setWidth(30);
 		lopta.setHeight(30);
+		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
 		lopta.brzinaX = 50;
 		lopta.brzinaY = 50;
 		gd = new GestureDetector(this);
 		Gdx.input.setInputProcessor(gd);
 		mainStage.addActor(lopta);
+		mainStage.addActor(gameover);
 	}
 
 	@Override
 	public void render () {
 
+		if(lopta.getX()<0 || lopta.getY()<0|| lopta.getX()+lopta.getWidth()>Gdx.graphics.getWidth() || lopta.getY()+lopta.getHeight()>Gdx.graphics.getHeight()){
+			lopta.brzinaX = 0;
+			lopta.brzinaY = 0;
+			gameover.setVisible(true);
+
+		}
+
 
 		if(Gdx.input.justTouched()){
 			lopta.started = true;
 			lopta.setSize(lopta.getWidth()+10,lopta.getHeight()+10);
+			lopta.brzinaX*=1.1;
+			lopta.brzinaY*=1.1;
 			lopta.brzinaX = -lopta.brzinaX;
 			lopta.brzinaY = -lopta.brzinaY;
 		}
