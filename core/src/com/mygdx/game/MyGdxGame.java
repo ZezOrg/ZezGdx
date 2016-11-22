@@ -31,7 +31,8 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 		lopta.setPosition(Gdx.graphics.getWidth()/2-lopta.getWidth()/2,Gdx.graphics.getHeight()/2-lopta.getHeight()/2);
 		lopta.setWidth(30);
 		lopta.setHeight(30);
-
+		lopta.brzinaX = 50;
+		lopta.brzinaY = 50;
 		gd = new GestureDetector(this);
 		Gdx.input.setInputProcessor(gd);
 		mainStage.addActor(lopta);
@@ -39,9 +40,14 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 
 	@Override
 	public void render () {
-		lopta.brzinaX = 50;
-		lopta.brzinaY = 50;
 
+
+		if(Gdx.input.justTouched()){
+			lopta.started = true;
+			lopta.setSize(lopta.getWidth()+10,lopta.getHeight()+10);
+			lopta.brzinaX = -lopta.brzinaX;
+			lopta.brzinaY = -lopta.brzinaY;
+		}
 
 		dt = Gdx.graphics.getDeltaTime();
 		mainStage.act(dt);
@@ -64,10 +70,7 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
 	@Override
 	public boolean tap(float x, float y, int count, int button) {
 
-		dt = 2;
-
-
-		return true;
+		return false;
 	}
 
 	@Override

@@ -17,6 +17,7 @@ public class Objekat extends Actor {
     public Rectangle granica;
     public float brzinaX;
     public float brzinaY;
+    boolean started = false;
 
 
     public Objekat(){
@@ -42,9 +43,9 @@ public class Objekat extends Actor {
         return	granica;
     }
     public void act(float dt){
-        super.act(dt);
+        if(started){
 
-        moveBy(brzinaX*dt, brzinaY*dt);
+        moveBy(brzinaX*dt, brzinaY*dt);}
     }
 
     public void draw(Batch b, float parentAlpha){
