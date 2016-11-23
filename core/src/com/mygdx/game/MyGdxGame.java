@@ -2,15 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener {
@@ -22,6 +17,8 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
     float dt;
     double randomX;
     double randomY;
+    int min = 10000;
+    int max = 10000;
 
     @Override
     public void create() {
@@ -54,17 +51,22 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
             lopta.brzinaX = 0;
             lopta.brzinaY = 0;
             gameover.setVisible(true);
-
         }
 
 
         if (Gdx.input.justTouched()) {
             lopta.started = true;
-            lopta.setSize(lopta.getWidth() + 10, lopta.getHeight() + 10);
-            lopta.brzinaX *= 1.1;
-            lopta.brzinaY *= 1.1;
-            lopta.brzinaX = -lopta.brzinaX;
-            lopta.brzinaY = -lopta.brzinaY;
+            lopta.setSize(lopta.getWidth() + 3, lopta.getHeight() + 3);
+            lopta.brzinaX *= 1.03;
+            lopta.brzinaY *= 1.03;
+            randomX = -min + (int) (Math.random() * ((max - (-min)) + 1));
+            randomY = -min + (int) (Math.random() * ((max - (-min)) + 1));
+            if (randomX < 2500) {
+                lopta.brzinaX = -lopta.brzinaX;
+            }
+            if (randomY < 2500) {
+                lopta.brzinaY = -lopta.brzinaY;
+            }
         }
 
         dt = Gdx.graphics.getDeltaTime();
