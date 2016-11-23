@@ -6,19 +6,22 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class MyGdxGame extends ApplicationAdapter implements GestureDetector.GestureListener {
 
     Stage mainStage;
-    GestureDetector gd;
     Objekat lopta;
     Objekat gameover;
+    Objekat restart;
     float dt;
     double randomX;
     double randomY;
     int min = 10000;
     int max = 10000;
+    boolean resizeBall;
 
     @Override
     public void create() {
@@ -31,6 +34,20 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
         gameover.setHeight(100);
         gameover.setPosition(Gdx.graphics.getWidth() / 2 - gameover.getWidth() / 2, Gdx.graphics.getHeight() / 2 - gameover.getHeight() / 2);
 
+        restart = new Objekat();
+        restart.setTexture(new Texture("restart.png"));
+        restart.setVisible(false);
+        restart.setWidth(300);
+        restart.setHeight(100);
+        restart.setPosition(Gdx.graphics.getWidth() / 2 - restart.getWidth() / 2, 0);
+        restart.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                create();
+            }
+        });
+
         lopta = new Objekat();
         lopta.setTexture(new Texture("ball2.png"));
         lopta.setWidth(30);
@@ -38,10 +55,13 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
         lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, Gdx.graphics.getHeight() / 2 - lopta.getHeight() / 2);
         lopta.brzinaX = 50;
         lopta.brzinaY = 50;
-        gd = new GestureDetector(this);
-        Gdx.input.setInputProcessor(gd);
+
         mainStage.addActor(lopta);
         mainStage.addActor(gameover);
+        mainStage.addActor(restart);
+        resizeBall = true;
+
+        Gdx.input.setInputProcessor(mainStage);
     }
 
     @Override
@@ -51,12 +71,15 @@ public class MyGdxGame extends ApplicationAdapter implements GestureDetector.Ges
             lopta.brzinaX = 0;
             lopta.brzinaY = 0;
             gameover.setVisible(true);
+            resizeBall = false;
+            restart.setVisible(true);
         }
-
 
         if (Gdx.input.justTouched()) {
             lopta.started = true;
-            lopta.setSize(lopta.getWidth() + 3, lopta.getHeight() + 3);
+            if (resizeBall) {
+                lopta.setSize(lopta.getWidth() + 3, lopta.getHeight() + 3);
+            }
             lopta.brzinaX *= 1.03;
             lopta.brzinaY *= 1.03;
             randomX = -min + (int) (Math.random() * ((max - (-min)) + 1));
