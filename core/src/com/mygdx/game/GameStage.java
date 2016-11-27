@@ -19,6 +19,7 @@ public class GameStage extends Stage{
     double randomY;
     int min = 10000;
     int max = 10000;
+    boolean restartClicked = false;
 
     public GameStage(){
         gameover = new Objekat();
@@ -38,6 +39,7 @@ public class GameStage extends Stage{
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                restartClicked = true;
             }
         });
 
@@ -110,5 +112,11 @@ public class GameStage extends Stage{
         this.max = max;
     }
 
+    public boolean isRestartClicked() {
+        return restartClicked;
+    }
 
+    public void setRestartClicked(boolean restartClicked) {
+        this.restartClicked = restartClicked;
+    }
 }

@@ -38,6 +38,10 @@ public class MyGdxGame extends ApplicationAdapter {
                 restart.setVisible(true);
             }
 
+            if(((GameStage) mainStage).isRestartClicked()){
+                mainStage = new GameStage();
+            }
+
             if (Gdx.input.justTouched()) {
                 lopta.started = true;
                 if (resizeBall) {
