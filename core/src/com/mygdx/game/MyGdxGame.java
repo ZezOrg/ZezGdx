@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void create() {
         mainStage = new StartStage();
-
+        resizeBall = true;
         Gdx.input.setInputProcessor(mainStage);
     }
 
@@ -39,6 +39,7 @@ public class MyGdxGame extends ApplicationAdapter {
             }
 
             if(((GameStage) mainStage).isRestartClicked()){
+//                mainStage.dispose();
                 mainStage = new GameStage();
             }
 
@@ -65,7 +66,6 @@ public class MyGdxGame extends ApplicationAdapter {
                 mainStage = new GameStage();
             }
         }
-
 
         dt = Gdx.graphics.getDeltaTime();
         mainStage.act(dt);
