@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class StartStage extends Stage{
 
-    Objekat start;
-    Objekat settings;
-    Objekat exit;
-    boolean startClicked = false;
+    private Objekat start;
+    private Objekat settings;
+    private Objekat exit;
+    private boolean startClicked = false;
 
     public StartStage(){
 
@@ -43,7 +43,7 @@ public class StartStage extends Stage{
 //            @Override
 //            public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
-//                new MyGdxGame();
+//
 //            }
 //        });
 
@@ -53,13 +53,14 @@ public class StartStage extends Stage{
         exit.setWidth(100);
         exit.setHeight(50);
         exit.setPosition(Gdx.graphics.getWidth() / 2 - exit.getWidth() / 2, Gdx.graphics.getHeight() / 2 - exit.getHeight() / 2 -  100);
-//        exit.addListener(new ClickListener(){
-//            @Override
-//            public void clicked(InputEvent event, float x, float y) {
-//                super.clicked(event, x, y);
-//                dispose();
-//            }
-//        });
+        exit.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                dispose();
+                Gdx.app.exit();
+            }
+        });
 
         addActor(start);
         addActor(settings);

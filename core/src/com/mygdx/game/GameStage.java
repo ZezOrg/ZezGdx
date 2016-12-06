@@ -10,18 +10,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Majki on 27.11.2016.
  */
 
-public class GameStage extends Stage{
+public class GameStage extends Stage {
 
-    Objekat lopta;
-    Objekat gameover;
-    Objekat restart;
-    double randomX;
-    double randomY;
-    int min = 10000;
-    int max = 10000;
-    boolean restartClicked = false;
+    private Objekat lopta;
+    private Objekat gameover;
+    private Objekat restart;
+    private double randomX;
+    private double randomY;
+    private int min = 10000;
+    private int max = 10000;
+    private boolean restartClicked;
+    private boolean resizeBall;
 
-    public GameStage(){
+    public GameStage() {
+
         gameover = new Objekat();
         gameover.setTexture(new Texture("gameover.png"));
         gameover.setVisible(false);
@@ -42,6 +44,9 @@ public class GameStage extends Stage{
                 restartClicked = true;
             }
         });
+
+        restartClicked = false;
+        resizeBall = true;
 
         lopta = new Objekat();
         lopta.setTexture(new Texture("ball2.png"));
@@ -119,4 +124,13 @@ public class GameStage extends Stage{
     public void setRestartClicked(boolean restartClicked) {
         this.restartClicked = restartClicked;
     }
+
+    public boolean isResizeBall() {
+        return resizeBall;
+    }
+
+    public void setResizeBall(boolean resizeBall) {
+        this.resizeBall = resizeBall;
+    }
+
 }

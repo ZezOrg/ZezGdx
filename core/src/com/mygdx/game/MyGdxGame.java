@@ -7,18 +7,16 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-    Stage mainStage;
-    float dt;
-    double randomX;
-    double randomY;
-    int min = 10000;
-    int max = 10000;
-    boolean resizeBall;
+    private Stage mainStage;
+    private float dt;
+    private double randomX;
+    private double randomY;
+    private int min = 10000;
+    private int max = 10000;
 
     @Override
     public void create() {
         mainStage = new StartStage();
-        resizeBall = true;
         Gdx.input.setInputProcessor(mainStage);
     }
 
@@ -33,19 +31,19 @@ public class MyGdxGame extends ApplicationAdapter {
             if (lopta.getX() < 0 || lopta.getY() < 0 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight()) {
                 lopta.brzinaX = 0;
                 lopta.brzinaY = 0;
+                ((GameStage) mainStage).setResizeBall(false);
                 gameover.setVisible(true);
-                resizeBall = false;
                 restart.setVisible(true);
-            }
-
-            if(((GameStage) mainStage).isRestartClicked()){
-//                mainStage.dispose();
-                mainStage = new GameStage();
+                Gdx.input.setInputProcessor(mainStage);
+                if(((GameStage) mainStage).isRestartClicked()){
+                    mainStage.dispose();
+                    mainStage = new GameStage();
+                }
             }
 
             if (Gdx.input.justTouched()) {
                 lopta.started = true;
-                if (resizeBall) {
+                if (((GameStage) mainStage).isResizeBall()) {
                     lopta.setSize(lopta.getWidth() + 3, lopta.getHeight() + 3);
                 }
                 lopta.brzinaX *= 1.03;
@@ -61,8 +59,8 @@ public class MyGdxGame extends ApplicationAdapter {
             }
         }
 
-        if(mainStage instanceof StartStage){
-            if(((StartStage) mainStage).isStartClicked()){
+        if (mainStage instanceof StartStage) {
+            if (((StartStage) mainStage).isStartClicked()) {
                 mainStage = new GameStage();
             }
         }
