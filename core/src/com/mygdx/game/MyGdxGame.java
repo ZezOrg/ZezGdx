@@ -35,7 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
                 gameover.setVisible(true);
                 restart.setVisible(true);
                 Gdx.input.setInputProcessor(mainStage);
-                if(((GameStage) mainStage).isRestartClicked()){
+                if (((GameStage) mainStage).isRestartClicked()) {
                     mainStage.dispose();
                     mainStage = new GameStage();
                 }
@@ -51,14 +51,14 @@ public class MyGdxGame extends ApplicationAdapter {
                 randomX = -min + (int) (Math.random() * ((max - (-min)) + 1));
                 randomY = -min + (int) (Math.random() * ((max - (-min)) + 1));
 
-                if(lopta.getX() < 50 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth()-50){
+                if (lopta.getX() < 50 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() - 50) {
                     lopta.brzinaX = -lopta.brzinaX;
-                }else if (randomX < 2500) {
+                } else if (randomX < 2500) {
                     lopta.brzinaX = -lopta.brzinaX;
                 }
-                if(lopta.getY() < 50 || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight()-50){
+                if (lopta.getY() < 50 || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight() - 50) {
                     lopta.brzinaY = -lopta.brzinaY;
-                }else if (randomY < 2500) {
+                } else if (randomY < 2500) {
                     lopta.brzinaY = -lopta.brzinaY;
                 }
             }
