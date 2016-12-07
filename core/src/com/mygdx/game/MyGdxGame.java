@@ -50,10 +50,15 @@ public class MyGdxGame extends ApplicationAdapter {
                 lopta.brzinaY *= 1.03;
                 randomX = -min + (int) (Math.random() * ((max - (-min)) + 1));
                 randomY = -min + (int) (Math.random() * ((max - (-min)) + 1));
-                if (randomX < 2500) {
+
+                if(lopta.getX() < 50 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth()-50){
+                    lopta.brzinaX = -lopta.brzinaX;
+                }else if (randomX < 2500) {
                     lopta.brzinaX = -lopta.brzinaX;
                 }
-                if (randomY < 2500) {
+                if(lopta.getY() < 50 || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight()-50){
+                    lopta.brzinaY = -lopta.brzinaY;
+                }else if (randomY < 2500) {
                     lopta.brzinaY = -lopta.brzinaY;
                 }
             }
@@ -61,6 +66,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
         if (mainStage instanceof StartStage) {
             if (((StartStage) mainStage).isStartClicked()) {
+                mainStage.dispose();
                 mainStage = new GameStage();
             }
         }

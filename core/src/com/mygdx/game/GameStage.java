@@ -32,11 +32,11 @@ public class GameStage extends Stage {
         gameover.setPosition(Gdx.graphics.getWidth() / 2 - gameover.getWidth() / 2, Gdx.graphics.getHeight() / 2 - gameover.getHeight() / 2);
 
         restart = new Objekat();
-        restart.setTexture(new Texture("restart.png"));
+        restart.setTexture(new Texture("restart3.png"));
         restart.setVisible(false);
-        restart.setWidth(300);
+        restart.setWidth(100);
         restart.setHeight(100);
-        restart.setPosition(Gdx.graphics.getWidth() / 2 - restart.getWidth() / 2, 0);
+        restart.setPosition(Gdx.graphics.getWidth() / 2 - restart.getWidth() / 2, 5);
         restart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
