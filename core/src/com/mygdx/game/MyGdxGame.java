@@ -13,6 +13,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private double randomY;
     private int min = 10000;
     private int max = 10000;
+    private int safeClickZone = 50;
 
     @Override
     public void create() {
@@ -51,12 +52,12 @@ public class MyGdxGame extends ApplicationAdapter {
                 randomX = -min + (int) (Math.random() * ((max - (-min)) + 1));
                 randomY = -min + (int) (Math.random() * ((max - (-min)) + 1));
 
-                if (lopta.getX() < 50 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() - 50) {
+                if (lopta.getX() < safeClickZone || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() - safeClickZone) {
                     lopta.brzinaX = -lopta.brzinaX;
                 } else if (randomX < 2500) {
                     lopta.brzinaX = -lopta.brzinaX;
                 }
-                if (lopta.getY() < 50 || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight() - 50) {
+                if (lopta.getY() < safeClickZone || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight() - safeClickZone) {
                     lopta.brzinaY = -lopta.brzinaY;
                 } else if (randomY < 2500) {
                     lopta.brzinaY = -lopta.brzinaY;
