@@ -10,14 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Majki  on 27.11.2016.
  */
 
-public class StartStage extends Stage{
+public class StartStage extends Stage {
 
     private Objekat start;
     private Objekat settings;
     private Objekat exit;
     private boolean startClicked = false;
 
-    public StartStage(){
+    public StartStage() {
 
         start = new Objekat();
         start.setTexture(new Texture("start.png"));
@@ -25,7 +25,7 @@ public class StartStage extends Stage{
         start.setWidth(250);
         start.setHeight(100);
         start.setPosition(Gdx.graphics.getWidth() / 2 - start.getWidth() / 2, Gdx.graphics.getHeight() / 2 - start.getHeight() / 2 + 150);
-        start.addListener(new ClickListener(){
+        start.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
@@ -52,8 +52,8 @@ public class StartStage extends Stage{
         exit.setVisible(true);
         exit.setWidth(100);
         exit.setHeight(50);
-        exit.setPosition(Gdx.graphics.getWidth() / 2 - exit.getWidth() / 2, Gdx.graphics.getHeight() / 2 - exit.getHeight() / 2 -  100);
-        exit.addListener(new ClickListener(){
+        exit.setPosition(Gdx.graphics.getWidth() / 2 - exit.getWidth() / 2, Gdx.graphics.getHeight() / 2 - exit.getHeight() / 2 - 100);
+        exit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
