@@ -2,7 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class MyGdxGame extends ApplicationAdapter {
@@ -15,8 +17,10 @@ public class MyGdxGame extends ApplicationAdapter {
     private int max = 10000;
     private int safeClickZone = 50;
 
+
     @Override
     public void create() {
+
         mainStage = new StartStage();
         Gdx.input.setInputProcessor(mainStage);
     }
@@ -28,6 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
             Objekat lopta = ((GameStage) mainStage).getLopta();
             Objekat gameover = ((GameStage) mainStage).getGameover();
             Objekat restart = ((GameStage) mainStage).getRestart();
+
 
             if (lopta.getX() < 0 || lopta.getY() < 0 || lopta.getX() + lopta.getWidth() > Gdx.graphics.getWidth() || lopta.getY() + lopta.getHeight() > Gdx.graphics.getHeight()) {
                 lopta.brzinaX = 0;

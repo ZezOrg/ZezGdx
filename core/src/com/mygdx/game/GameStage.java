@@ -1,7 +1,11 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -21,8 +25,16 @@ public class GameStage extends Stage {
     private int max = 10000;
     private boolean restartClicked;
     private boolean resizeBall;
+    private Objekat rect;
+
 
     public GameStage() {
+
+        rect = new Objekat();
+        rect.setTexture(new Texture("rect.png"));
+        rect.setPosition(30,30);
+        rect.setHeight(getHeight()-150);
+        rect.setWidth(getWidth()-60);
 
         gameover = new Objekat();
         gameover.setTexture(new Texture("gameover.png"));
@@ -52,13 +64,16 @@ public class GameStage extends Stage {
         lopta.setTexture(new Texture("ball2.png"));
         lopta.setWidth(30);
         lopta.setHeight(30);
-        lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, Gdx.graphics.getHeight() / 2 - lopta.getHeight() / 2);
+        lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, (rect.getHeight()+30) / 2 - lopta.getHeight() / 2);
         lopta.brzinaX = 50;
         lopta.brzinaY = 50;
 
+        addActor(rect);
         addActor(lopta);
         addActor(gameover);
         addActor(restart);
+
+
     }
 
     public Objekat getLopta() {
@@ -132,5 +147,7 @@ public class GameStage extends Stage {
     public void setResizeBall(boolean resizeBall) {
         this.resizeBall = resizeBall;
     }
+
+
 
 }
