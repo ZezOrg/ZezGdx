@@ -3,11 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -26,6 +28,8 @@ public class GameStage extends Stage {
     private boolean restartClicked;
     private boolean resizeBall;
     private Objekat rect;
+    private Label timeLabel;
+    BitmapFont font;
 
 
     public GameStage() {
@@ -67,6 +71,13 @@ public class GameStage extends Stage {
         lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, (rect.getHeight()+30) / 2 - lopta.getHeight() / 2);
         lopta.brzinaX = 50;
         lopta.brzinaY = 50;
+
+        font = new BitmapFont();
+        timeLabel = new Label("Time", new Label.LabelStyle(font, Color.RED));
+        timeLabel.setWidth(200);
+        timeLabel.setHeight(200);
+        timeLabel.setPosition(0, 0);
+        addActor(timeLabel);
 
         addActor(rect);
         addActor(lopta);
