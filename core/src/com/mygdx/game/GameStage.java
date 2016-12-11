@@ -74,9 +74,7 @@ public class GameStage extends Stage {
 
         font = new BitmapFont();
         timeLabel = new Label("Time", new Label.LabelStyle(font, Color.RED));
-        timeLabel.setWidth(200);
-        timeLabel.setHeight(200);
-        timeLabel.setPosition(0, 0);
+        timeLabel.setPosition(Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.9f);
         addActor(timeLabel);
 
         addActor(rect);
