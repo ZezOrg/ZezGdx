@@ -75,8 +75,8 @@ public class GameStage extends Stage {
         font = new BitmapFont();
         timeLabel = new Label("Time", new Label.LabelStyle(font, Color.RED));
         timeLabel.setPosition(Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.9f);
-        addActor(timeLabel);
 
+        addActor(timeLabel);
         addActor(rect);
         addActor(lopta);
         addActor(gameover);
