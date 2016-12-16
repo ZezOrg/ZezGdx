@@ -16,15 +16,18 @@ public class StartStage extends Stage {
     private Objekat settings;
     private Objekat exit;
     private boolean startClicked = false;
+    private float someScales;
 
     public StartStage() {
+
+        someScales = (float) (Gdx.graphics.getWidth() * 0.14);
 
         start = new Objekat();
         start.setTexture(new Texture("start.png"));
         start.setVisible(true);
-        start.setWidth(250);
-        start.setHeight(100);
-        start.setPosition(Gdx.graphics.getWidth() / 2 - start.getWidth() / 2, Gdx.graphics.getHeight() / 2 - start.getHeight() / 2 + 150);
+        start.setWidth(2.5f * someScales);
+        start.setHeight(someScales);
+        start.setPosition(Gdx.graphics.getWidth() / 2 - start.getWidth() / 2, Gdx.graphics.getHeight() / 2 - start.getHeight() / 2 + someScales*1.5f);
         start.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -36,8 +39,8 @@ public class StartStage extends Stage {
         settings = new Objekat();
         settings.setTexture(new Texture("settings.png"));
         settings.setVisible(true);
-        settings.setWidth(200);
-        settings.setHeight(70);
+        settings.setWidth(2 * someScales);
+        settings.setHeight(0.7f * someScales);
         settings.setPosition(Gdx.graphics.getWidth() / 2 - settings.getWidth() / 2, Gdx.graphics.getHeight() / 2 - settings.getHeight() / 2);
 //        settings.addListener(new ClickListener(){
 //            @Override
@@ -50,9 +53,9 @@ public class StartStage extends Stage {
         exit = new Objekat();
         exit.setTexture(new Texture("exit.png"));
         exit.setVisible(true);
-        exit.setWidth(100);
-        exit.setHeight(50);
-        exit.setPosition(Gdx.graphics.getWidth() / 2 - exit.getWidth() / 2, Gdx.graphics.getHeight() / 2 - exit.getHeight() / 2 - 100);
+        exit.setWidth(someScales);
+        exit.setHeight(someScales/2);
+        exit.setPosition(Gdx.graphics.getWidth() / 2 - exit.getWidth() / 2, Gdx.graphics.getHeight() / 2 - exit.getHeight() / 2 - someScales);
         exit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

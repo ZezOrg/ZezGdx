@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -29,30 +26,40 @@ public class GameStage extends Stage {
     private boolean resizeBall;
     private Objekat rect;
     private Label timeLabel;
-    BitmapFont font;
+    private Label tapLabel;
+    private Label bestScoreTime;
+    private Label bestScoreTaps;
+    private BitmapFont font;
+    private float rectDistance;
+    private float ballSize;
+    private float someScales;
 
 
     public GameStage() {
 
+        rectDistance = (float) (Gdx.graphics.getWidth() * 0.04);
+        ballSize = (float) (Gdx.graphics.getWidth() * 0.041);
+        someScales = (float) (Gdx.graphics.getWidth() * 0.14);
+
         rect = new Objekat();
         rect.setTexture(new Texture("rect.png"));
-        rect.setPosition(30,30);
-        rect.setHeight(getHeight()-150);
-        rect.setWidth(getWidth()-60);
+        rect.setPosition(rectDistance, rectDistance);
+        rect.setHeight(getHeight() - rectDistance * 5);
+        rect.setWidth(getWidth() - rectDistance * 2);
 
         gameover = new Objekat();
         gameover.setTexture(new Texture("gameover.png"));
         gameover.setVisible(false);
-        gameover.setWidth(300);
-        gameover.setHeight(100);
+        gameover.setWidth(someScales * 3);
+        gameover.setHeight(someScales);
         gameover.setPosition(Gdx.graphics.getWidth() / 2 - gameover.getWidth() / 2, Gdx.graphics.getHeight() / 2 - gameover.getHeight() / 2);
 
         restart = new Objekat();
         restart.setTexture(new Texture("restart3.png"));
         restart.setVisible(false);
-        restart.setWidth(100);
-        restart.setHeight(100);
-        restart.setPosition(Gdx.graphics.getWidth() / 2 - restart.getWidth() / 2, 5);
+        restart.setWidth(someScales);
+        restart.setHeight(someScales);
+        restart.setPosition(Gdx.graphics.getWidth() / 2 - restart.getWidth() / 2, (float) (Gdx.graphics.getHeight() * 0.05));
         restart.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -66,22 +73,37 @@ public class GameStage extends Stage {
 
         lopta = new Objekat();
         lopta.setTexture(new Texture("ball2.png"));
-        lopta.setWidth(30);
-        lopta.setHeight(30);
-        lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, (rect.getHeight()+30) / 2 - lopta.getHeight() / 2);
-        lopta.brzinaX = 50;
-        lopta.brzinaY = 50;
+        lopta.setWidth(ballSize);
+        lopta.setHeight(ballSize);
+        lopta.setPosition(Gdx.graphics.getWidth() / 2 - lopta.getWidth() / 2, (rect.getHeight() + 30) / 2 - lopta.getHeight() / 2);
+        lopta.brzinaX = someScales;
+        lopta.brzinaY = someScales;
 
         font = new BitmapFont();
-        timeLabel = new Label("Time", new Label.LabelStyle(font, Color.RED));
-        timeLabel.setPosition(Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.9f);
+        timeLabel = new Label("Time : ", new Label.LabelStyle(font, Color.RED));
+        timeLabel.setPosition(Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.91f);
+        timeLabel.setFontScale(2);
+
+        tapLabel = new Label("Tap count : ", new Label.LabelStyle(font, Color.RED));
+        tapLabel.setPosition(Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.94f);
+        tapLabel.setFontScale(2);
+
+        bestScoreTime = new Label("Best : ", new Label.LabelStyle(font, Color.RED));
+        bestScoreTime.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() * 0.91f);
+        bestScoreTime.setFontScale(2);
+
+        bestScoreTaps = new Label("Best : ", new Label.LabelStyle(font, Color.RED));
+        bestScoreTaps.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() * 0.94f);
+        bestScoreTaps.setFontScale(2);
 
         addActor(timeLabel);
+        addActor(tapLabel);
+        addActor(bestScoreTime);
+        addActor(bestScoreTaps);
         addActor(rect);
         addActor(lopta);
         addActor(gameover);
         addActor(restart);
-
 
     }
 
@@ -157,6 +179,51 @@ public class GameStage extends Stage {
         this.resizeBall = resizeBall;
     }
 
+    public Objekat getRect() {
+        return rect;
+    }
 
+    public void setRect(Objekat rect) {
+        this.rect = rect;
+    }
 
+    public Label getTimeLabel() {
+        return timeLabel;
+    }
+
+    public void setTimeLabel(Label timeLabel) {
+        this.timeLabel = timeLabel;
+    }
+
+    public BitmapFont getFont() {
+        return font;
+    }
+
+    public void setFont(BitmapFont font) {
+        this.font = font;
+    }
+
+    public Label getTapLabel() {
+        return tapLabel;
+    }
+
+    public void setTapLabel(Label tapLabel) {
+        this.tapLabel = tapLabel;
+    }
+
+    public Label getBestScoreTime() {
+        return bestScoreTime;
+    }
+
+    public void setBestScoreTime(Label bestScoreTime) {
+        this.bestScoreTime = bestScoreTime;
+    }
+
+    public Label getBestScoreTaps() {
+        return bestScoreTaps;
+    }
+
+    public void setBestScoreTaps(Label bestScoreTaps) {
+        this.bestScoreTaps = bestScoreTaps;
+    }
 }
